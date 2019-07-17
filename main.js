@@ -1,22 +1,36 @@
+    const apiKey = ''
+    const searchURl = 'https://api.thecatapi.com/v1/images/search'
 
-    function watchForm(){
-        $('form').on('submit', function(e){
-            e.preventDefault();
-            getCatApi();
-        })  
+function formatQueryParams(params){
+    const queryItems = Object.keys(params)
+        .map(key => `${encodeURIComponent(key)} = ${encodeURIComponent(params[key])}`)
+        return queryItems.join('&')
     }
 
-    function getCatApi(){
-        fetch(`https://api.thecatapi.com/v1/images/search`)
-        .then(response => response.json())
-        .then(responseJson => displayResults(responseJson))
+    function getCatApi(apiKey, searchURL){
+        const params = {
+            key: apiKey,
+        }
+        const queryString = formatQueryParams(params)
+        const url = searchURL + '?' + queryString
+        fetch(url)
+        .then(response => response.url)
+        .then (responseUrl => console.log(responseUrl))
+        .then(responseUrl => displayResults(responseUrl))
+
         .catch('something went wrong')
     }
 
 
-    function displayResults(responseJson){
+    function displayResults(responseUrl){
         $('#resultContainer').html('')
-        $('.results-img').html(`<img src="${responseJson.url}" />`)
+        $('#resultContainer').append(`<img src="${responseUrl}" />`)
+    }
+    function watchForm(){
+        $('button').on('click', function(e){
+
+            getCatApi();
+        })  
     }
 
     $(function(){
