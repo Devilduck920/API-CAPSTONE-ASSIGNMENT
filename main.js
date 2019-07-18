@@ -1,34 +1,29 @@
-    const apiKey = ''
-    const searchURl = 'https://api.thecatapi.com/v1/images/search'
-
-function formatQueryParams(params){
-    const queryItems = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)} = ${encodeURIComponent(params[key])}`)
-        return queryItems.join('&')
-    }
-
-    function getCatApi(apiKey, searchURL){
-        const params = {
-            key: apiKey,
-        }
-        const queryString = formatQueryParams(params)
-        const url = searchURL + '?' + queryString
+    function fetchFUNC(searchUrl, apiKey) {
+        const url = searchUrl + '?api_key=' + apiKey 
         fetch(url)
-        .then(response => response.url)
-        .then (responseUrl => console.log(responseUrl))
-        .then(responseUrl => displayResults(responseUrl))
-
+        .then(response => {
+            console.log(response)
+            return response.json()
+        })
+        .then (responseJson =>  { 
+            console.log(responseJson[0].url)
+            displayResults(responseJson)
+        })
         .catch('something went wrong')
     }
-
-
-    function displayResults(responseUrl){
-        $('#resultContainer').html('')
-        $('#resultContainer').append(`<img src="${responseUrl}" />`)
+    function displayResults(responseJson) {
+        $('#resultConainter').html('')
+        $('.results-img').attr('src' , `${responseJson[0].url}`)
+            .addClass('containImage ')
+            .removeClass('hidden')
+    }
+    function getCatApi(){
+        const apiKey = 'a5295d92-dbaf-4fb2-a789-55c45ad3c594'
+        const searchURL = `https://api.thecatapi.com/v1/images/search?api_key=${apiKey}`
+        fetchFUNC(searchURL)
     }
     function watchForm(){
         $('button').on('click', function(e){
-
             getCatApi();
         })  
     }
