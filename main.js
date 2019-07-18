@@ -1,6 +1,13 @@
-    function fetchFUNC(searchUrl, apiKey) {
-        const url = searchUrl + '?api_key=' + apiKey 
-        fetch(url)
+
+    function displayResults(responseJson) {
+        $('#resultImageConainter').html('')
+        $('.results-img').attr('src' , `${responseJson[0].url}`)
+            .addClass('containImage')
+            .removeClass('hidden')
+    }
+    function getCatImageApi(){
+        const searchURL = 'https://api.thecatapi.com/v1/images/search'
+        fetch(searchURL)
         .then(response => {
             console.log(response)
             return response.json()
@@ -11,24 +18,24 @@
         })
         .catch('something went wrong')
     }
-    function displayResults(responseJson) {
-        $('#resultConainter').html('')
-        $('.results-img').attr('src' , `${responseJson[0].url}`)
-            .addClass('containImage ')
-            .removeClass('hidden')
-    }
-    function getCatApi(){
-        const apiKey = 'a5295d92-dbaf-4fb2-a789-55c45ad3c594'
-        const searchURL = `https://api.thecatapi.com/v1/images/search?api_key=${apiKey}`
-        fetchFUNC(searchURL)
-    }
-    function watchForm(){
+    function watchImage(){
         $('button').on('click', function(e){
-            getCatApi();
+            getCatImageApi();
         })  
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    function watchFact(){
+        const url = "https://cat-fact.herokuapp.com/facts"
+        fetch(url)
+            .then(response => {
+                console.log(response)
+            })
+            
     }
 
     $(function(){
         console.log('ready to load')
-        watchForm()
+        watchImage()
+        watchFact()
     })
