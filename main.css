@@ -44,7 +44,7 @@ span{
 }
 @media(min-width:600px){
     .containThumb{
-        height:150px;
-        width:150px;
+        height:120px;
+        width:120px;
     }
 }
