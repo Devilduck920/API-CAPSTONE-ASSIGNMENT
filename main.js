@@ -1,4 +1,3 @@
-
     function displayCatImageResults(responseJson) {
         $('#resultsConainter').html('')
         $('.results-img').attr('src' , `${responseJson[0].url}`)
@@ -14,17 +13,18 @@
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function displayJoke(responseJson) {
+
         $('.results-txt').html('')
         $('.results-txt').append(`${responseJson.value.joke}`)
-
             .removeClass('hidden')
     }
 
     function getJokeApi(){
-        const url = "https://api.icndb.com/jokes/random"
+        const url = "http://api.icndb.com/jokes/random"
         fetch(url)
-            .then(response =>response.json())
+            .then(response => response.json())
             .then(responseJson => {
+                console.log(responseJson)
                 displayJoke(responseJson)
             })
             .catch('error was caught')
@@ -35,10 +35,10 @@
 
     function watchApis(){
         $('button').on('click', function(){
-            $('section').fadeOut(1050)
             getCatImageApi();
             getJokeApi()
             $('button').html('Next')
+            $('section').fadeOut(1100)
         })  
     }
     $(function(){
