@@ -16,6 +16,7 @@
     function displayJoke(responseJson) {
         $('.results-txt').html('')
         $('.results-txt').append(`${responseJson.value.joke}`)
+
             .removeClass('hidden')
     }
 
@@ -33,10 +34,11 @@
 
 
     function watchApis(){
-        $('button').on('click', function(e){
+        $('button').on('click', function(){
+            $('section').fadeOut(1050)
             getCatImageApi();
             getJokeApi()
-
+            $('button').html('Next')
         })  
     }
     $(function(){
