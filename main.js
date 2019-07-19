@@ -36,6 +36,7 @@
         $('button').on('click', function(e){
             getCatImageApi();
             getJokeApi()
+
         })  
     }
     $(function(){
