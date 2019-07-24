@@ -1,7 +1,7 @@
 const apiKey = 'AIzaSyBuEocizD6Gv32eYB0uYNTZORE7jeGRcIU'; 
 const searchURL = 'https://www.googleapis.com/youtube/v3/search';
 function displayResults(responseJson) {  
-  $('.resultsContainer').html('')
+  
     for(let i = 0; i < responseJson.items.length; i++){ 
       
         onYouTubeIframeAPIReady()
@@ -10,9 +10,8 @@ function displayResults(responseJson) {
         <br>
         <div id="player"></div>
       `)
-      
-      .removeClass('hidden')  
-      .addClass('inline')
+        .removeClass('hidden')  
+        .addClass('inline')
     }
   }
 function formatQueryParams(params) {
@@ -20,9 +19,8 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 function getYouTubeVideos(searchTerm) {
-    
     const params = {
-        q: searchTerm + ' dogs',
+        q: searchTerm,
         part: 'snippet',
         key: apiKey
     };
@@ -33,20 +31,14 @@ function getYouTubeVideos(searchTerm) {
         .then(responseJson => {
           console.log(responseJson)
           displayResults(responseJson)})
-          
         .catch('something went wrong')
-
 }
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     const searchTerm = $('#dogInput').val();
-    
     getYouTubeVideos(searchTerm);
-    
-    
- 
+    $('.resultsContainer').html('')
   });
 }
-
 $(watchForm);
