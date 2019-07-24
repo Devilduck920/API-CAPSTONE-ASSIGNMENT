@@ -3,12 +3,13 @@ const searchURL = 'https://www.googleapis.com/youtube/v3/search';
 function displayResults(responseJson) {  
     
     for(let i = 0; i < responseJson.items.length; i++){ 
+        onYouTubeIframeAPIReady()
         $('section').append(`
         <p>${responseJson.items[i].snippet.title}</p>
         <br>
         <div id="player"></div>
       `)
-      onYouTubeIframeAPIReady()
+      
       .removeClass('hidden')  
       .addClass('inline')
     }
