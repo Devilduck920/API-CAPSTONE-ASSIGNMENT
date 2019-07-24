@@ -8,30 +8,19 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div>
-        <section>
-            <h1>DO YOU LOVE</h1><br> 
-                <img class="containThumb" src="Images/cat.jpg"></img> 
-                <span>AND</span>
-                <img class="containThumb"src="Images/chuck.jpg"></img><br>
-            <h1>?</h1>
-            <p>According to fake statistics a lot of people love cats 
-                and Chuck Norris. This application will allow 
-                you to swoon over adorable felines while laughing out loud over 
-                Chuck Facts.
-            </p>
-        </section>
-    </div>
-    <div id="resultsContainer">
-        <img class="results-img hidden containImage" alt="">
-        <p class="results-txt hidden containText"></p>
-    </div>
-    <div class="buttonContainer">
-        <button class="buttonStyle">Press</button>
-        <a href="index.html" class="buttonStyle">RESET</a>
-    </div>
-    
+
+    <form>
+        <label for="Species of dog:">Species of dog:</label>
+        <input type="text" id="dogInput"  class="inputBackground" placeholder="dogs">
+        <input  class="buttonStyle "type="submit">
+    </form>
+    <section class="resultsContainer">
+        <img src="#" class="hidden" alt="">
+     
+
+    </section>
+
     <script src="main.js"></script>
-    
+    <script src="iFrame.js"></script>
 </body>
 </html>

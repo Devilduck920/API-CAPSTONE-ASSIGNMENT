@@ -1,47 +1,50 @@
-    function displayCatImageResults(responseJson) {
-        $('#resultsConainter').html('')
-        $('.results-img').attr('src' , `${responseJson[0].url}`)
-            .addClass('containImage')
-            .removeClass('hidden')
+const apiKey = 'AIzaSyBuEocizD6Gv32eYB0uYNTZORE7jeGRcIU'; 
+const searchURL = 'https://www.googleapis.com/youtube/v3/search';
+function displayResults(responseJson) {  
+    
+    for(let i = 0; i < responseJson.items.length; i++){ 
+        $('section').append(`
+        <p>${responseJson.items[i].snippet.title}</p>
+        <br>
+        <div id="player"></div>
+      `)
+      onYouTubeIframeAPIReady()
+      .removeClass('hidden')  
+      .addClass('inline')
     }
-    function getCatImageApi(){
-        const searchURL = 'https://api.thecatapi.com/v1/images/search'
-        fetch(searchURL)
-            .then(response => response.json())
-            .then (responseJson => displayCatImageResults(responseJson))
-            .catch('something went wrong')
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function displayJoke(responseJson) {
+  }
+function formatQueryParams(params) {
+  const queryItems = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  return queryItems.join('&');
+}
+function getYouTubeVideos(searchTerm) {
+    
+    const params = {
+        q: searchTerm + ' dogs',
+        part: 'snippet',
+        key: apiKey
+    };
+    const queryString = formatQueryParams(params)
+    const url = searchURL + '?' + queryString 
+    fetch(url)
+        .then(response => response.json())
+        .then(responseJson => {
+          console.log(responseJson)
+          displayResults(responseJson)})
+          
+        .catch('something went wrong')
 
-        $('.results-txt').html('')
-        $('.results-txt').append(`${responseJson.value.joke}`)
-            .removeClass('hidden')
-    }
+}
+function watchForm() {
+  $('form').submit(event => {
+    event.preventDefault();
+    const searchTerm = $('#dogInput').val();
+    $('.resultsContainer').html('')
+    getYouTubeVideos(searchTerm);
+    
+    
+ 
+  });
+}
 
-    function getJokeApi(){
-        const url = "http://api.icndb.com/jokes/random"
-        fetch(url)
-            .then(response => response.json())
-            .then(responseJson => {
-                console.log(responseJson)
-                displayJoke(responseJson)
-            })
-            .catch('error was caught')
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    function watchApis(){
-        $('button').on('click', function(){
-            getCatImageApi();
-            getJokeApi()
-            $('button').html('Next')
-            $('section').fadeOut(1100)
-        })  
-    }
-    $(function(){
-        console.log('ready to load')
-        watchApis()
-    })
+$(watchForm);
