@@ -7,7 +7,7 @@
     list-style:none;
 }
 body{
-    background-image:url(/Images/spacebackground.jpg);
+    background-image:url(Images/spacebackground.jpg);
 
 }
 .hidden{
@@ -38,16 +38,22 @@ section > ul > li{
     
 }
 
-@media(min-width:700px){
+@media(min-width:600px){
+    *{
+        font-size:24px;
+    }
     #player{
         height:360px;
-        width:80%;
+        width:75%;
     }
 }
 
-@media(min-width:850px){
+@media(min-width:750px){
+    *{
+        font-size:24px;
+    }
     #player{
         height:450px;
-        width:65%;
+        width:50%;
     }
 }
