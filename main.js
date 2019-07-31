@@ -89,7 +89,7 @@ function watchForm() {
     getYouTubeVideos(searchTerm);
     getStarWarsApi(searchTerm);
     $('#input').html('')
-    $('h3').removeClass('hidden')
+    $('h4').removeClass('hidden')
   });
 }
 
