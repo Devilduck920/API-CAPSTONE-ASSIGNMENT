@@ -61,7 +61,7 @@ function displayStarWarsInfo(responseJson, searchTerm){
       <ul>
           <li>Name: ${objMain.name}</li><br>
           <li>Hair Color: ${objMain.hair_color}</li><br>
-          <li>Height: ${objMain.height} inches</li><br>
+          <li>Height: ${objMain.height} cm</li><br>
           <li>Color: ${objMain.skin_color}</li><br>
           <li>Eye Color: ${objMain.eye_color}</li><br>
           <li>Birth Year: ${objMain.birth_year}</li><br>
