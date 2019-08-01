@@ -2,20 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Api Capstone</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <form>
-        <label for="Search:">Star Wars Character:</label><br>
-        <input type="text" id="input" required class="inputBackground" placeholder="Search">
-        <input  class="buttonStyle "type="SUBMIT">
-        <h4 class="hidden">PRESS AGAIN !</h4>
-    </form>
-    <section class="resultsContainer">
-    </section>
+    <main>
+        <form>
+            <label for="Search:">Star Wars</label><br>
+            <input type="text" id="input" required class="inputBackground" placeholder="Search">
+            <input  class="buttonStyle "type="submit">
+            <h4 class="hidden">PRESS AGAIN !</h4>
+        </form>
+        <section class="resultsContainer"></section>
+    </main>
+    <footer>
+        <button class="btn buttonStyle">ABOUT</button>    
+        <p class="hidden">Welcome to this interaction between the Star Wars api and Youtube Api. Search a character, press the button and then learn more than ever before.</p>
+    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>

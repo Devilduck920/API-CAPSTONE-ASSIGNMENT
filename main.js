@@ -4,67 +4,66 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady(videoId) {
-    player = new YT.Player('player', {
-        height: '280px',
-        width: '100%',
-        videoId: videoId,
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-      }
-    });
+  player = new YT.Player('player', {
+    height: '280px',
+    width: '100%',
+    videoId: videoId,
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
 }
 function onPlayerReady(event) {
-    event.target.playVideo();
+  event.target.playVideo();
 }
 var done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(6000);
-      done = true;
+    setTimeout(6000);
+    done = true;
   }
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////   YOUTUBE IFRAME  ^
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayResults(responseJson) {  
-    console.log(responseJson)  
-    const randomIndex = Math.floor(Math.random() * 5);
-    const videoId = responseJson.items[randomIndex].id.videoId;
-    $('section').html(`
-        <div id="player"></div>
-    `)
-    onYouTubeIframeAPIReady(videoId)
+  const randomIndex = Math.floor(Math.random() * 5);
+  const videoId = responseJson.items[randomIndex].id.videoId;
+  $('section').html(`
+    <div id="player"></div>
+  `)
+  onYouTubeIframeAPIReady(videoId)
 }
 function getYouTubeVideos(searchTerm) {
-
     const apiKey = 'AIzaSyBuEocizD6Gv32eYB0uYNTZORE7jeGRcIU'; 
     const searchURL = 'https://www.googleapis.com/youtube/v3/search';
     const params = {
-        part:'snippet',
-        q: `star wars ${searchTerm} origin story`,
-        key: apiKey,
+      part:'snippet',
+      q: `star wars ${searchTerm} origin story`,
+      key: apiKey,
     };
     const queryString = formatQueryParams(params)
     const url = searchURL + '?' + queryString 
     fetch(url)
-        .then(response => response.json())
-        .then(responseJson => {
-          displayResults(responseJson)
-        })
-        .catch('something went wrong')
+      .then(response => response.json())
+      .then(responseJson => {
+        displayResults(responseJson)
+      })
+      .catch('something went wrong')
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function displayStarWarsInfo(responseJson, searchTerm){
-  console.log(responseJson)
-  const objMain = responseJson.results[0];
+///////////////////////////////////////////////////////////////////////////////////////////////////////////     YOUTUBE API AND DISPLAY FX ^
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function displayStarWarsInfo(responseJson, searchTerm){
+  const objMain = responseJson.results[0];
     $('section').append(`
       <ul>
-          <li>Name: ${objMain.name}</li><br>
-          <li>Hair Color: ${objMain.hair_color}</li><br>
-          <li>Height: ${objMain.height} cm</li><br>
-          <li>Color: ${objMain.skin_color}</li><br>
-          <li>Eye Color: ${objMain.eye_color}</li><br>
-          <li>Birth Year: ${objMain.birth_year}</li><br>
+        <li>Name: ${objMain.name}</li><br>
+        <li>Hair Color: ${objMain.hair_color}</li><br>
+        <li>Height: ${objMain.height} cm</li><br>
+        <li>Color: ${objMain.skin_color}</li><br>
+        <li>Eye Color: ${objMain.eye_color}</li><br>
+        <li>Birth Year: ${objMain.birth_year}</li><br>
       </ul>
     `)
 }
@@ -78,19 +77,48 @@ function getStarWarsApi(searchTerm){
     })
     .catch('error, fix.')    
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////   STAR WARS API AND DISPLAY FX ^
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function formatQueryParams(params) {
   const queryItems = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   return queryItems.join('&');
 }
+function handleAboutButton() { 
+  let txtStatus = false;
+  $('.btn').on('click',function(){
+    if(txtStatus === false){
+      $('p').fadeIn('10000');
+      $(this).html('HIDE');
+      txtStatus = true;
+    } else { 
+      txtStatus = false;
+      $(this).html('ABOUT');
+      $('p').fadeOut('10000');
+    }
+  })
+}
+function rmIntroHidden(){
+  $('h4').removeClass('hidden')
+  $('footer').removeClass('hidden')
+}
 function watchForm() {
+  handleAboutButton();
   $('form').submit(event => {
     event.preventDefault();
     const searchTerm = $('#input').val();
+    $('#input').html('')
     getYouTubeVideos(searchTerm);
     getStarWarsApi(searchTerm);
-    $('#input').html('')
-    $('h4').removeClass('hidden')
+    rmIntroHidden()
+    
   });
 }
 
 $(watchForm)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////   QUERY FORMAT, EVENT LISTENER AND CALLBACK
+
+
+
+
