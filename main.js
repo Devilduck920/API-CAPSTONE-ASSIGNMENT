@@ -66,6 +66,9 @@ function displayStarWarsInfo(responseJson, searchTerm){
         <li>Birth Year: ${objMain.birth_year}</li><br>
       </ul>
     `)
+
+    
+    
 }
 function getStarWarsApi(searchTerm){
   const baseUrl = 'https://swapi.co/api/people/?search='
@@ -85,16 +88,16 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 function handleAboutButton() { 
-  let txtStatus = false;
+  let txtStatus = true;
   $('.btn').on('click',function(){
-    if(txtStatus === false){
-      $('p').fadeIn('10000');
-      $(this).html('HIDE');
-      txtStatus = true;
-    } else { 
-      txtStatus = false;
-      $(this).html('ABOUT');
+    if(txtStatus === true){
       $('p').fadeOut('10000');
+      $(this).html('ABOUT');
+      txtStatus = false;
+    } else { 
+      txtStatus = true;
+      $(this).html('HIDE');
+      $('p').fadeIn('10000');
     }
   })
 }
