@@ -3,3 +3,5 @@ This Crossover between Youtube Data API and The Star Wars Database Api bring you
 
 GITHUB REPO:           https://github.com/Devilduck920/Youtube-Swapi-API-CX-
 GITHUB PAGES LIVE APP: https://devilduck920.github.io/Youtube-Swapi-API-CX-/
+
+Tech used:  HTML, CSS, JAVASCRIPT W/ JQUERY AND AJAX
