@@ -5,3 +5,4 @@ GITHUB REPO:           https://github.com/Devilduck920/Youtube-Swapi-API-CX-
 GITHUB PAGES LIVE APP: https://devilduck920.github.io/Youtube-Swapi-API-CX-/
 
 Tech used:  HTML, CSS, JAVASCRIPT W/ JQUERY AND AJAX
+![](https://github.com/Devilduck920/portfolio/blob/master/images/starWarsImage.jpg)
